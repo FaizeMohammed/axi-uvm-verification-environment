@@ -159,6 +159,22 @@ Coverage includes:
 
 Protocol SVA assertions are not included in the current checked-in revision; assertion development and validation are planned as the next extension.
 
+## SystemVerilog Assertions (SVA)
+
+Implemented SystemVerilog Assertions in the AXI3 interface (`axi_if.sv`) to check protocol signal stability during stalled handshakes.
+
+**Assertions implemented:**
+- **AW Channel:** Address and control signals remain stable while `AWVALID` is asserted and `AWREADY` is low.
+- **W Channel:** Write data, strobe, ID, and last signals remain stable during a stalled handshake.
+- **B Channel:** Response ID and response signals remain stable while the response is stalled.
+- **AR Channel:** Read address and control signals remain stable during a stalled handshake.
+- **R Channel:** Read data, ID, response, and last signals remain stable while the response is stalled.
+
+**Verification results:**
+- Assertions enabled during regression.
+- Regression completed successfully.
+- **100% assertion coverage reported by QuestaSim.**
+- 
 ## Simulation Results
 
 The project regression includes the following tests:
@@ -172,6 +188,9 @@ The project regression includes the following tests:
 | Random | `make run_test4` | `random_test` |
 
 The reported regression completed with the tests passing and approximately 98% aggregate functional coverage. Individual test logs and the merged coverage report are the recommended evidence for reproducing and reviewing these results.
+
+Coverage Report
+<img width="1917" height="505" alt="Screenshot 2026-11-12 135951" src="https://github.com/user-attachments/assets/f0e2c192-65f1-4fdf-914d-128c48acb9b5" />
 
 ## Repository Structure
 
@@ -262,7 +281,5 @@ make report
 
 ---
 
-Coverage Report
-<img width="1917" height="505" alt="Screenshot 2026-11-12 135951" src="https://github.com/user-attachments/assets/f0e2c192-65f1-4fdf-914d-128c48acb9b5" />
 
 
