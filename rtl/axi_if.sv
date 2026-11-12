@@ -97,7 +97,68 @@ logic RREADY;//master
 	modport S_DRV_MP(clocking slave_drv_cb);
 	modport MON_MP(clocking monitor_cb);
 
+//====================================================
+// AXI3 CHANNEL STABILITY ASSERTIONS
+//====================================================
 
+// 1. Write Address Channel
+property p_aw_stable;
+    @(posedge ACLK) disable iff (!ARESETn)
+    (AWVALID && !AWREADY)
+    |=> AWVALID &&
+        $stable({AWID, AWADDR, AWLEN, AWSIZE, AWBURST});
+endproperty
+
+assert property (p_aw_stable)
+    else $error("AXI3: AW channel stability violation");
+
+
+// 2. Write Data Channel
+property p_w_stable;
+    @(posedge ACLK) disable iff (!ARESETn)
+    (WVALID && !WREADY)
+    |=> WVALID &&
+        $stable({WID, WDATA, WSTRB, WLAST});
+endproperty
+
+assert property (p_w_stable)
+    else $error("AXI3: W channel stability violation");
+
+
+// 3. Write Response Channel
+property p_b_stable;
+    @(posedge ACLK) disable iff (!ARESETn)
+    (BVALID && !BREADY)
+    |=> BVALID &&
+        $stable({BID, BRESP});
+endproperty
+
+assert property (p_b_stable)
+    else $error("AXI3: B channel stability violation");
+
+
+// 4. Read Address Channel
+property p_ar_stable;
+    @(posedge ACLK) disable iff (!ARESETn)
+    (ARVALID && !ARREADY)
+    |=> ARVALID &&
+        $stable({ARID, ARADDR, ARLEN, ARSIZE, ARBURST});
+endproperty
+
+assert property (p_ar_stable)
+    else $error("AXI3: AR channel stability violation");
+
+
+// 5. Read Data Channel
+property p_r_stable;
+    @(posedge ACLK) disable iff (!ARESETn)
+    (RVALID && !RREADY)
+    |=> RVALID &&
+        $stable({RID, RDATA, RRESP, RLAST});
+endproperty
+
+assert property (p_r_stable)
+    else $error("AXI3: R channel stability violation");
 
 endinterface
 
