@@ -262,13 +262,7 @@ make report
 
 ---
 
-## Current Status and Future Work
+Coverage Report
+<img width="1917" height="505" alt="Screenshot 2026-11-12 135951" src="https://github.com/user-attachments/assets/f0e2c192-65f1-4fdf-914d-128c48acb9b5" />
 
-- [x] Master and slave UVM agents
-- [x] Directed FIXED, INCR and WRAP burst sequences
-- [x] Constrained-random sequence
-- [x] Slave-side associative memory model
-- [x] Monitor-based transaction comparison
-- [x] Read/write functional coverage and cross coverage
-- [ ] Add and validate AXI3 protocol SVA assertions
-- [ ] Publish the merged HTML coverage report as repository evidence
+
