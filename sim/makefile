@@ -63,7 +63,7 @@ cov : cov_$(SIMULATOR)
 sv_cmp_Questa:
 	vlib $(work)
 	vmap work $(work)
-	vlog -work $(work) +cover=bcefst $(RTL) $(INC) $(SVTB2) $(SVTB1)
+	vlog -work $(work) $(RTL) $(INC) $(SVTB2) $(SVTB1)
 	
 run_test0_Questa: sv_cmp
 	vsim -cvgperinstance $(VSIMOPT) $(VSIMCOV) $(VSIMBATCH0)  -wlf wave_file0.wlf -l test0.log  -sv_seed random  work.top +UVM_TESTNAME=test
